@@ -6,5 +6,6 @@ module.exports = {
     title: `tokidokionigiri`,
     siteUrl: `https://www.yourdomain.tld`
   },
-  plugins: ["gatsby-plugin-sass"]
+  plugins: ["gatsby-plugin-sass"],
+  pathPrefix: "/tokidokionigiri",
 };
