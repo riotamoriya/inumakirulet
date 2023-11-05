@@ -2,11 +2,12 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
+  pathPrefix: "/tokidokionigiri",
   siteMetadata: {
     title: `tokidokionigiri`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://riotamoriya.github.io/tokidokionigiri`
   },
-  pathPrefix: "/tokidokionigiri",
+
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,

@@ -1,17 +1,26 @@
 import * as React from "react";
 import { useState, useEffect } from 'react';
-
-import sound from '../../musics/shake.mp3'; // メインの音声ファイルをインポート
-import specialSound from '../../musics/dontmove.mp3'; // 特別な音声ファイルをインポート
+import { useStaticQuery, graphql } from 'gatsby';
 
 const CharacterImage = () => {
   const [normalAudio, setNormalAudio] = useState(null);
   const [specialAudio, setSpecialAudio] = useState(null);
 
+  const data = useStaticQuery(graphql`
+  query fetchSounds{
+    normal: file(relativePath: { eq: "shake.mp3" }) {
+      publicURL
+    }
+    special: file(relativePath: { eq: "dontmove.mp3" }) {
+      publicURL
+    }
+  }
+`);
+
   useEffect(() => {
     // Audio オブジェクトを初期化する
-    setNormalAudio(new Audio(sound));
-    setSpecialAudio(new Audio(specialSound));
+    setNormalAudio(new Audio(data.normal.publicURL));
+    setSpecialAudio(new Audio(data.special.publicURL));
   }, []);
 
   // 音声を再生する関数
