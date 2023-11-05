@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
 // ボタンのスタイル
@@ -23,6 +22,7 @@ const buttonHoverStyle = {
   transform: 'scale(1.05)',
   boxShadow: '0 4px 20px 0 rgba(255, 105, 135, .5)',
 };
+
 
 
 const CharacterImage = () => {
@@ -49,15 +49,18 @@ const CharacterImage = () => {
     setSpecialAudio(new Audio(data.special.publicURL));
   }, [data.normal.publicURL, data.special.publicURL]);
 
+
   // 音声を再生する関数
-  const playSound = () => {
-    const isSpecial = Math.floor(Math.random() * 100) + 1 === 1;
-    const audio = isSpecial ? specialAudio : normalAudio;
-    if (audio) {
-      audio.play();
-    }
+  const playSound = (audioFile) => {
+    const audio = new Audio(audioFile);
+    audio.play();
   };
 
+  // 特別な音を再生する確率を計算する関数
+  const getAudioFile = () => {
+    const isSpecial = Math.random() < 0.01; // 1% の確率で特別な音声
+    return isSpecial ? data.special.publicURL : data.normal.publicURL;
+  };
   // ボタンにホバー状態を適用する関数
   const applyHoverStyle = (hoverState) => {
     setIsHovered(hoverState);
@@ -67,7 +70,7 @@ const CharacterImage = () => {
   return (
     <>
       <button
-        onClick={playSound}
+        onClick={() => playSound(getAudioFile())}
         onMouseEnter={() => applyHoverStyle(true)}
         onMouseLeave={() => applyHoverStyle(false)}
         style={isHovered ? {...buttonStyle, ...buttonHoverStyle} : buttonStyle}

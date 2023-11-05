@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
+import './global.css';
 
 import CharacterImage from "../components/CharacterImage";
 import VoiceBotton from '../components/VoiceBotton';
