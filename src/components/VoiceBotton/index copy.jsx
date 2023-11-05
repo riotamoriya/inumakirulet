@@ -2,6 +2,22 @@ import * as React from "react";
 import { useState, useEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
+
+// // ボタンのスタイル
+// const buttonStyle = {
+//   width: '20vh',
+//   height: '10vh',
+//   fontSize: '2vw',
+//   backgroundColor: '#007bff', // 鮮やかな青色
+//   color: 'white',
+//   border: 'none',
+//   borderRadius: '10%', // 角を少し丸める
+//   boxShadow: '0 4px 8px rgba(0, 123, 255, 0.3)', // 軽い影を追加
+//   outline: 'none',
+//   cursor: 'pointer',
+//   transition: 'transform 0.1s ease', // 押したときの動きを滑らかに
+// };
+
 // ボタンのスタイル
 const buttonStyle = {
   padding: '1rem 2rem',
@@ -26,9 +42,6 @@ const buttonHoverStyle = {
 
 
 const CharacterImage = () => {
-  // ホバー状態の管理
-  const [isHovered, setIsHovered] = useState(false);
-
   const [normalAudio, setNormalAudio] = useState(null);
   const [specialAudio, setSpecialAudio] = useState(null);
 
@@ -56,11 +69,6 @@ const CharacterImage = () => {
     if (audio) {
       audio.play();
     }
-  };
-
-  // ボタンにホバー状態を適用する関数
-  const applyHoverStyle = (hoverState) => {
-    setIsHovered(hoverState);
   };
 
 
