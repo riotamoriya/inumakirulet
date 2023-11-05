@@ -8,10 +8,10 @@ const CharacterImage = () => {
 
   const data = useStaticQuery(graphql`
   query fetchSounds{
-    normal: file(relativePath: { eq: "shake.mp3" }) {
+    normal: file(relativePath: { eq: "shake.m4a" }) {
       publicURL
     }
-    special: file(relativePath: { eq: "dontmove.mp3" }) {
+    special: file(relativePath: { eq: "dontmove.m4a" }) {
       publicURL
     }
   }
@@ -21,11 +21,11 @@ const CharacterImage = () => {
     // Audio オブジェクトを初期化する
     setNormalAudio(new Audio(data.normal.publicURL));
     setSpecialAudio(new Audio(data.special.publicURL));
-  }, []);
+  }, [data.normal.publicURL, data.special.publicURL]);
 
   // 音声を再生する関数
   const playSound = () => {
-    const isSpecial = Math.floor(Math.random() * 100) + 1 === 1;
+    const isSpecial = Math.floor(Math.random() * 10) + 1 === 1;
     const audio = isSpecial ? specialAudio : normalAudio;
     if (audio) {
       audio.play();

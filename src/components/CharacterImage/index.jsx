@@ -8,9 +8,11 @@ const CharacterImage = () => {
       file(relativePath: { eq: "inumaki.jpg" }) {
         childImageSharp {
           gatsbyImageData(
+            width: 800, 
+            height: 800, 
             layout: CONSTRAINED 
             placeholder: BLURRED
-            formats: WEBP
+            formats: [AUTO, WEBP]
           )
         }
       }
