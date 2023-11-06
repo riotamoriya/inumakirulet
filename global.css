@@ -8,4 +8,5 @@
 html, body {
   overflow: hidden; /* 水平および垂直スクロールを無効にする */
   height: 100%; /* オーバーフローを隠すために高さを設定する */
+  background-color: snow;
 }
