@@ -23,20 +23,22 @@ module.exports = {
         icon: `src/images/inumaki.jpg`, // このパスにはあなたのファビコンの画像へのパスを指定します。
       },
     },
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images/`,
+        name: `inumaki_voices`,
+        path: `${__dirname}/static/character-set/inumaki/voices/`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `musics`,
-        path: `${__dirname}/src/musics/`,
+        name: `inumaki_illusts`,
+        path: `${__dirname}/static/character-set/inumaki/illusts/`,
       },
     },
+
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
