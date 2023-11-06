@@ -2,13 +2,12 @@
  * @type {import('gatsby').GatsbyConfig}
  **/
 
-
 module.exports = {
-  pathPrefix: "/tokidokionigiri",
+  pathPrefix: "/inumakirulet",
   siteMetadata: {
     title: `狗巻棘確率機`,
     author: `@riotamoriya`,
-    siteUrl: `https://riotamoriya.github.io/tokidokionigiri/`,
+    siteUrl: `https://riotamoriya.github.io/inumakirulet/`,
   },
   
   plugins: [
