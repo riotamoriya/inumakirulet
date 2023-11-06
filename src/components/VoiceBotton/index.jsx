@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+
 
 // ボタンのスタイル
 const buttonStyle = {
@@ -36,30 +37,53 @@ const CharacterImage = () => {
     }
   }
 `);
+
   // ホバー状態の管理
   const [isHovered, setIsHovered] = useState(false);
-
-  // 音声を再生する関数
-  const playSound = (audioFile) => {
-    const audio = new Audio(audioFile);
-    audio.play();
-  };
-
-  // 特別な音を再生する確率を計算する関数
-  const getAudioFile = () => {
-    const isSpecial = Math.random() < 0.01; // 1% の確率で特別な音声
-    return isSpecial ? data.special.publicURL : data.normal.publicURL;
-  };
   // ボタンにホバー状態を適用する関数
   const applyHoverStyle = (hoverState) => {
     setIsHovered(hoverState);
   };
 
+  // クエリ部分は変わらず...
+  const [audioContext, setAudioContext] = useState(null);
+
+  // Web Audio API用のオーディオデータ
+  const [normalBuffer, setNormalBuffer] = useState(null);
+  const [specialBuffer, setSpecialBuffer] = useState(null);
+  
+  useEffect(() => {
+    // AudioContextを初期化
+    const context = new (window.AudioContext || window.webkitAudioContext)();
+    setAudioContext(context);
+
+    // オーディオファイルをプリロードする関数
+    const preloadAudio = async (url) => {
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      return context.decodeAudioData(arrayBuffer);
+    };
+
+    // オーディオファイルをプリロード
+    preloadAudio(data.normal.publicURL).then(buffer => setNormalBuffer(buffer));
+    preloadAudio(data.special.publicURL).then(buffer => setSpecialBuffer(buffer));
+  }, [data.normal.publicURL, data.special.publicURL]);
+
+  // 音声を再生する関数
+  const playSound = () => {
+    if (audioContext && normalBuffer && specialBuffer) {
+      const isSpecial = Math.random() < 0.01;
+      const source = audioContext.createBufferSource();
+      source.buffer = isSpecial ? specialBuffer : normalBuffer;
+      source.connect(audioContext.destination);
+      source.start(0);
+    }
+  };
 
   return (
     <>
       <button
-        onClick={() => playSound(getAudioFile())}
+        onClick={playSound}
         onMouseEnter={() => applyHoverStyle(true)}
         onMouseLeave={() => applyHoverStyle(false)}
         style={isHovered ? {...buttonStyle, ...buttonHoverStyle} : buttonStyle}
