@@ -4,3 +4,8 @@
   -ms-user-select: none; /* Internet Explorer/Edge 用のプレフィックス */
   user-select: none; /* 非プレフィックスバージョン, Chrome/Opera 用 */
 }
+/* スクロールを禁止するCSS */
+html, body {
+  overflow: hidden; /* 水平および垂直スクロールを無効にする */
+  height: 100%; /* オーバーフローを隠すために高さを設定する */
+}

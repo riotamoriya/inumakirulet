@@ -1,14 +1,29 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
- */
+ **/
+
+
 module.exports = {
   pathPrefix: "/tokidokionigiri",
   siteMetadata: {
-    title: `tokidokionigiri`,
-    siteUrl: `https://riotamoriya.github.io/tokidokionigiri/`
+    title: `狗巻棘確率機`,
+    author: `@riotamoriya`,
+    siteUrl: `https://riotamoriya.github.io/tokidokionigiri/`,
   },
   
   plugins: [
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `狗巻棘確率機`,
+        short_name: `狗巻棘確率機`,
+        start_url: `/`,
+        background_color: `#ffffff`,
+        theme_color: `#2e2f41`,
+        display: `standalone`,
+        icon: `src/images/inumaki.jpg`, // このパスにはあなたのファビコンの画像へのパスを指定します。
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -43,6 +58,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-image`,
+    
   ],
 };
 

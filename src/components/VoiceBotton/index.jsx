@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
 // ボタンのスタイル
@@ -24,13 +24,7 @@ const buttonHoverStyle = {
 };
 
 
-
 const CharacterImage = () => {
-  // ホバー状態の管理
-  const [isHovered, setIsHovered] = useState(false);
-
-  const [normalAudio, setNormalAudio] = useState(null);
-  const [specialAudio, setSpecialAudio] = useState(null);
 
   const data = useStaticQuery(graphql`
   query fetchSounds{
@@ -42,13 +36,8 @@ const CharacterImage = () => {
     }
   }
 `);
-
-  useEffect(() => {
-    // Audio オブジェクトを初期化する
-    setNormalAudio(new Audio(data.normal.publicURL));
-    setSpecialAudio(new Audio(data.special.publicURL));
-  }, [data.normal.publicURL, data.special.publicURL]);
-
+  // ホバー状態の管理
+  const [isHovered, setIsHovered] = useState(false);
 
   // 音声を再生する関数
   const playSound = (audioFile) => {
@@ -75,7 +64,7 @@ const CharacterImage = () => {
         onMouseLeave={() => applyHoverStyle(false)}
         style={isHovered ? {...buttonStyle, ...buttonHoverStyle} : buttonStyle}
       >
-        Play Sound
+        {/* Play Sound */}
       </button>
     </>
   );
