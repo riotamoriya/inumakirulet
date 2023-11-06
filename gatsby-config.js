@@ -20,7 +20,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#2e2f41`,
         display: `standalone`,
-        icon: `src/images/inumaki.jpg`, // このパスにはあなたのファビコンの画像へのパスを指定します。
+        icon: `./favicon.jpg`, // このパスにはあなたのファビコンの画像へのパスを指定します。
       },
     },
 
