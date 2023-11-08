@@ -74,7 +74,7 @@ const SoundButton = () => {
 
   return (
     <button onClick={playSound} className="buttonStyle">
-      Say
+      ShaKe
     </button>
   );
 };
